@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>聊天室</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../下载/chat_128px_1201543_easyicon.net.ico</normaloff>../下载/chat_128px_1201543_easyicon.net.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="registerNmae">
@@ -26,6 +30,9 @@
     <property name="text">
      <string>用户名</string>
     </property>
+    <property name="buddy">
+     <cstring>userName</cstring>
+    </property>
    </widget>
    <widget class="QLabel" name="password">
     <property name="geometry">
@@ -39,25 +46,8 @@
     <property name="text">
      <string>密码</string>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="clientName">
-    <property name="geometry">
-     <rect>
-      <x>323</x>
-      <y>160</y>
-      <width>291</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="clientPassword">
-    <property name="geometry">
-     <rect>
-      <x>323</x>
-      <y>280</y>
-      <width>291</width>
-      <height>31</height>
-     </rect>
+    <property name="buddy">
+     <cstring>userPassword</cstring>
     </property>
    </widget>
    <widget class="QPushButton" name="loginButton">
@@ -105,38 +95,65 @@
      <string>Rouzip的聊天室</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuRouzip">
-    <property name="title">
-     <string>Rouzip的聊天室</string>
+   <widget class="QLineEdit" name="userName">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>170</y>
+      <width>191</width>
+      <height>27</height>
+     </rect>
     </property>
-    <addaction name="separator"/>
-    <addaction name="action_3"/>
-    <addaction name="action_2"/>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Normal</enum>
+    </property>
    </widget>
-   <addaction name="menuRouzip"/>
+   <widget class="QLineEdit" name="userPassword">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>290</y>
+      <width>191</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_2">
+  <action name="action_close">
    <property name="text">
     <string>关闭</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
   </action>
-  <action name="action_3">
+  <action name="action_personalive">
    <property name="text">
     <string>在线人员</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_login">
+   <property name="text">
+    <string>登录</string>
+   </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>userName</tabstop>
+  <tabstop>userPassword</tabstop>
+  <tabstop>loginButton</tabstop>
+  <tabstop>registerButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

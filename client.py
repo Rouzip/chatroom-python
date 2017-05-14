@@ -2,12 +2,13 @@ from cilentFunc import *
 from clientGUI import *
 import sys
 from PyQt5.Qt import QApplication
+from PyQt5.QtWidgets import QMainWindow
 
 
-class clientApplication(Ui_MainWindow):
+class clientApplication(QMainWindow, Ui_MainWindow):
 
-    def __init__(self):
-        super(Ui_MainWindow).__init__()
+    def __init__(self, parent=None):
+        super(clientApplication, self).__init__(parent)
         self.setupUi(self)
 
 
