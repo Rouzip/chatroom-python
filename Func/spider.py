@@ -3,7 +3,7 @@ import hashlib
 from bs4 import BeautifulSoup
 from collections import deque
 import logging
-
+import os
 
 def pictureSpider(url, visited, nameSet):
     # 存放要遍历的网站
@@ -40,9 +40,13 @@ def pictureSpider(url, visited, nameSet):
                     if photoUrl and photoName not in nameSet:
                         photo = requests.session().get(
                             photoUrl, headers=head, timeout=Timeout)
-                        with open(path + photoName, 'wb') as fp:
+                        with open(path + photoName + '.jpg', 'wb') as fp:
                             fp.write(photo.content)
                         nameSet.add(photoName)
+                    pictureNum = os.listdir(
+                        '/home/rouzip/chatroom-python/picture')
+                    if len(pictureNum) >= 30:
+                        return
                 except Exception as g:
                     logging.exception(g)
         except Exception as e:
@@ -60,7 +64,7 @@ Timeout = 5
 
 
 # 存储地址　初始URL
-url = url = "http://www.meizitu.com/"
+url = "http://www.meizitu.com/"
 path = '/home/rouzip/chatroom-python/picture/'
 
 

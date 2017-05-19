@@ -33,16 +33,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="image">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>30</y>
-     <width>271</width>
-     <height>451</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="send_btn">
    <property name="geometry">
     <rect>
@@ -67,6 +57,19 @@
    </property>
    <property name="text">
     <string>清除</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>40</y>
+     <width>251</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

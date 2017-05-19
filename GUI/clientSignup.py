@@ -7,14 +7,23 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox, QWidget
+import time
+
 
 class Ui_Dialog(object):
+
+    def __init__(self, clientChat):
+        self.client = clientChat
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(752, 554)
         Dialog.setMouseTracking(False)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../下载/Register_key_128px_510498_easyicon.net.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(
+            "../下载/Register_key_128px_510498_easyicon.net.ico"),
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
         self.widget = QtWidgets.QWidget(Dialog)
         self.widget.setGeometry(QtCore.QRect(140, 120, 471, 291))
@@ -56,6 +65,9 @@ class Ui_Dialog(object):
         self.label_3.setBuddy(self.password_lineEdit)
         self.label_4.setBuddy(self.password2_lineEdit)
 
+        #######################事件处理函数###########
+        self.signup_btn.clicked.connect(self.signUp)
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.userName_lineEdit, self.email_lineEdit)
@@ -72,6 +84,54 @@ class Ui_Dialog(object):
         self.label_4.setText(_translate("Dialog", "确认密码"))
         self.signup_btn.setText(_translate("Dialog", "注册"))
 
+    def signUp(self, socket):
+        name = self.userName_lineEdit.text()
+        email = self.email_lineEdit.text()
+        password1 = self.password_lineEdit.text()
+        password2 = self.password2_lineEdit.text()
+        for word in password1:
+            if word == ' ':
+                error = QMessageBox.critical(Dialog,
+                                             '警告！',
+                                             '您的密码不应包含空格！',
+                                             QMessageBox.Yes)
+                return
+        if not name:
+            error = QMessageBox.critical(Dialog,
+                                         '警告！',
+                                         '您的用户名为空！',
+                                         QMessageBox.Yes)
+            return
+        if not email:
+            error = QMessageBox.critical(Dialog,
+                                         '警告！',
+                                         '您的email为空！',
+                                         QMessageBox.Yes)
+            return
+        if not password1:
+            error = QMessageBox.critical(Dialog,
+                                         '警告！',
+                                         '您的密码为空！',
+                                         QMessageBox.Yes)
+            return
+        if not password1 == password2:
+            error = QMessageBox.critical(Dialog,
+                                         '警告！',
+                                         '您的两次密码不一致！',
+                                         QMessageBox.Yes)
+        return
+        self.client.socket.send(bytes('注册'))
+        time.sleep(1)
+        self.client.socket.send(bytes(name + ' ' + email + ' ' + password1))
+        response = self.client.socket.recv(1024)
+        if not response:
+            error = QMessageBox.information(
+                Dialog, '提示', "注册失败！",
+                QMessageBox.Yes)
+        success = QMessageBox.information(
+            Dialog, '提示', "注册成功！",
+            QMessageBox.Yes)
+
 
 if __name__ == "__main__":
     import sys
@@ -81,4 +141,3 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
-

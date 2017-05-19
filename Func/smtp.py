@@ -11,8 +11,18 @@ def sendEmail(desAddr):
         message = MIMEText('您已经注册成功', 'plain', 'utf-8')
         email.attach(message)
         html = MIMEText(
-            '<html><body><h4>您已经注册成功</h4>'
-            '</body></html>'	    	, 'html', 'utf-8')
+            '''<html>
+                <head>
+                <meta charset="utf-8">
+                <title>注册成功！</title>
+                </head>
+                <body>
+                <div id="wmd-preview" class="wmd-preview"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="2x59" id="注册成功">注册成功！</h1><hr><p data-anchor-id="q0ry">恭喜您，成为Rouzip聊天室的用户！ <br>
+                该程序的源代码发布在 <a href="https://github.com/Rouzip/chatroom-python" target="_blank">Rouzip的github</a> <br>
+                <img src="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/d439b6003af33a8759ff9e8bc45c10385243b595.jpg" alt="concat" title=""></p></div>
+                </body>
+               </html>'''
+            '</body></html>', 'html', 'utf-8')
         email.attach(html)
         return email
 
@@ -37,6 +47,7 @@ def sendEmail(desAddr):
         server.quit()
     except Exception as e:
         logging.exception(e)
+        print('邮件发送失败！')
 
 # 测试代码
 if __name__ == '__main__':
