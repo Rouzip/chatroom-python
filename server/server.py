@@ -97,7 +97,7 @@ class serverChat():
             except Exception as e:
                 logging.exception(e)
 
-        def login_chat():
+        def login():
             try:
                 loginInfo = str(msgType).split(' ')
                 clientName, password = loginInfo[0], loginInfo[1]
@@ -106,41 +106,56 @@ class serverChat():
                 cursor.execute('select name,password from User where name=%s',
                                clientName)
                 dataInDb = cursor.fetchall()
-                nameInDb = dataInDb[0][0]
-                passwordInDb = dataInDb[1][0]
+
                 cursor.close()
                 '''
                 失败的几种可能，一种是没有该用户,一种是密码不对，一种是此用户已经登录
                 分别发送失败1,2,3
                 '''
-                print(passwordInDb)
 
-                if not len(passwordInDb) or password != passwordInDb:
-                    socket.send(bytes('失败1', encoding='utf-8'))
+
+                if not len(dataInDb):
+                    socket.send(bytes('失败１', encoding='utf-8'))
+                    return
+
+                passwordInDb = dataInDb[0][1]
+                print(password)
+                print(passwordInDb)
+                if password != passwordInDb:
+                    socket.send(bytes('失败２', encoding='utf-8'))
                     return
 
                 if clientName in self.clientList:
-                    socket.send(bytes('失败2', encoding='utf-8'))
+                    socket.send(bytes('失败３', encoding='utf-8'))
                     return
-                socket.send(bytes('成功', encoding='utf-8'))
 
+                print('成功过检测')
+                socket.send(bytes('成功', encoding='utf-8'))
+                print('进入聊天模式')
+                return clientName
+
+
+            except Exception as e:
+                logging.exception(e)
+        # 加入默认测试对象a，以后使用
+        def chat(clientName='a'):
+            try:
                 # 服务器将在线的人员维护在字典之中，方便转发消息
                 self.clientList[clientName] = socket
                 while True:
                     messageByte = socket.recv(1024)
                     message = str(messageByte, encoding='utf-8')
-
                     if message == 'quit':
                         self.cilentQuit(clientName)
                         return
                     search = re.search(re.compile(r'(.*):(.*)'), message)
                     if search == None:
-                        self.sendError(socket, 2)
+                        socket.send(bytes('消息格式错误', encoding='utf-8'))
                         continue
                     name = search.group(1)
                     message = search.group(2)
                     if name not in self.clientList:
-                        self.sendError(socket, 3)
+                        socket.send(bytes('此人未登录', encoding='utf-8'))
                         continue
                     elif name == 'all':
                         self.sendMessageAll(clientName, message)
@@ -154,11 +169,16 @@ class serverChat():
         while True:
             # 获取处理消息类型
             msgType = str(socket.recv(1024), encoding='utf-8')
-            print(msgType)
             if msgType == '注册':
                 signup()
             else:
-                login_chat()
+                # name = login()
+                # if not name:
+                #     continue
+                # else:
+                #     chat()
+                chat()
+
 
     # 向客户端报错
     # 出错的原因一个是因为格式不对或者已经被使用，一个是聊天的时候目标不在list中

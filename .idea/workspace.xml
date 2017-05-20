@@ -2,29 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="608add6c-a57e-4a15-a0b2-2331039accc4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/picture/0d4b7ab0bb107cb0e11c0f1db45d1035.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/picture/e22ed8606555fb43f10a4aa57638cef7.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GUI/clientGUI.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/clientFunc.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/server.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/clientChat.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/clientFunc.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/clientMain.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/pymysqltest.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GUI/singup.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cilentFunc.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/clientGUI.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spidertest.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/chat.py" afterPath="$PROJECT_DIR$/GUI/clientChat.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/smtp.py" afterPath="$PROJECT_DIR$/Func/smtp.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spider.py" afterPath="$PROJECT_DIR$/Func/spider.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/0acf3caebc30e6a34edec0fc3f7bfe06.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/1c53f8d7452cdaa82f723a642bff1aaa.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/2069cf388471ea4a367272ace163b07c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/3f5228a26b0fc8d233fda8168dfc31ac.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/5d30866d442196bc46659fc4cc646518.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/675af8143e6850d4ce249f51436416b6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/6a5820724b7f9944323176848298598b.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/6feb881b7d5ce41e4a41a9ac4a4e35ea.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/72b162eeed6eb793332d26d0bd4da639.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/7473301662ea08a9688e726f9f4c2051.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/9ef9cadc57411d1e5d574c326fdb0004.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/a8dbce8849045ea8295e04c373cebd3d.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/a8f7e6840df25484b1652ffbe2982c5e.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/aa6289bca7217da61774270983b3b509.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/aa8defeb965361cf592a82bad45942e9.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/cd047b11b23840edd016e9c6b59589f8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/e3840ffb7b99a20ac4ac6390b9d4096e.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/eba1388fa4e8d21b200f9f1eae8aff6e.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/picture/fb186e16f19bfeb7c4eb718b6acdc295.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/chat.ui" afterPath="$PROJECT_DIR$/ui/chat.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.py" afterPath="$PROJECT_DIR$/server/server.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/clientChat.py" afterPath="$PROJECT_DIR$/test/clientChat.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/clientFunc.py" afterPath="$PROJECT_DIR$/test/clientFunc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/clientMain.py" afterPath="$PROJECT_DIR$/test/clientMain.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,8 +45,8 @@
       <file leaf-file-name="clientFunc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/clientFunc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+            <state relative-caret-position="439">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,8 +55,8 @@
       <file leaf-file-name="clientSignup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/clientSignup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3636">
-              <caret line="101" column="29" lean-forward="true" selection-start-line="96" selection-start-column="16" selection-end-line="101" selection-end-column="29" />
+            <state relative-caret-position="396">
+              <caret line="171" column="3" lean-forward="false" selection-start-line="171" selection-start-column="3" selection-end-line="171" selection-end-column="3" />
               <folding>
                 <element signature="e#194#236#0" expanded="true" />
               </folding>
@@ -64,7 +67,7 @@
       <file leaf-file-name="pymysqltest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/pymysqltest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
+            <state relative-caret-position="288">
               <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -76,11 +79,21 @@
       <file leaf-file-name="clientChat.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/clientChat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="155" column="11" lean-forward="false" selection-start-line="155" selection-start-column="11" selection-end-line="155" selection-end-column="11" />
+            <state relative-caret-position="1444">
+              <caret line="163" column="22" lean-forward="true" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
               <folding>
-                <element signature="e#192#234#0" expanded="true" />
+                <element signature="e#192#227#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="threading.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/lib/python3.5/threading.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="881" column="0" lean-forward="false" selection-start-line="881" selection-start-column="0" selection-end-line="881" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,8 +101,8 @@
       <file leaf-file-name="clientMain.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/clientMain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="140" column="35" lean-forward="true" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+            <state relative-caret-position="1123">
+              <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding>
                 <element signature="e#197#239#0" expanded="true" />
               </folding>
@@ -97,11 +110,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="chatNew.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/chatNew.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="server.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="122" column="68" lean-forward="false" selection-start-line="122" selection-start-column="68" selection-end-line="122" selection-end-column="68" />
+            <state relative-caret-position="223">
+              <caret line="157" column="48" lean-forward="false" selection-start-line="157" selection-start-column="48" selection-end-line="157" selection-end-column="48" />
               <folding>
                 <element signature="e#38#51#0" expanded="true" />
               </folding>
@@ -127,10 +150,13 @@
         <option value="$PROJECT_DIR$/test/clientSingup.py" />
         <option value="$PROJECT_DIR$/Func/spider.py" />
         <option value="$PROJECT_DIR$/test/pymysqltest.py" />
-        <option value="$PROJECT_DIR$/test/clientFunc.py" />
         <option value="$PROJECT_DIR$/test/clientSignup.py" />
+        <option value="$PROJECT_DIR$/test/test.py" />
+        <option value="$PROJECT_DIR$/test/test1.py" />
         <option value="$PROJECT_DIR$/test/clientChat.py" />
+        <option value="$PROJECT_DIR$/test/clientFunc.py" />
         <option value="$PROJECT_DIR$/test/clientMain.py" />
+        <option value="$PROJECT_DIR$/test/chatNew.py" />
         <option value="$PROJECT_DIR$/server/server.py" />
       </list>
     </option>
@@ -165,6 +191,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="chatroom-python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chatroom-python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chatroom-python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -233,7 +273,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Python.clientMain">
+  <component name="RunManager" selected="Python.chatNew">
     <configuration default="false" name="server (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -285,7 +325,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="clientSignup" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -297,12 +337,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="chatroom-python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/clientSignup.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="pymysqltest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="chatNew" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -314,7 +354,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="chatroom-python" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/pymysqltest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/chatNew.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -470,16 +510,16 @@
       <item index="0" class="java.lang.String" itemvalue="Python.server (1)" />
       <item index="1" class="java.lang.String" itemvalue="Python.clientMain" />
       <item index="2" class="java.lang.String" itemvalue="Python.clientChat" />
-      <item index="3" class="java.lang.String" itemvalue="Python.clientSignup" />
-      <item index="4" class="java.lang.String" itemvalue="Python.pymysqltest" />
+      <item index="3" class="java.lang.String" itemvalue="Python.test1" />
+      <item index="4" class="java.lang.String" itemvalue="Python.chatNew" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.clientMain" />
+        <item index="0" class="java.lang.String" itemvalue="Python.chatNew" />
         <item index="1" class="java.lang.String" itemvalue="Python.server (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.clientChat" />
-        <item index="3" class="java.lang.String" itemvalue="Python.clientSignup" />
-        <item index="4" class="java.lang.String" itemvalue="Python.pymysqltest" />
+        <item index="2" class="java.lang.String" itemvalue="Python.clientMain" />
+        <item index="3" class="java.lang.String" itemvalue="Python.clientChat" />
+        <item index="4" class="java.lang.String" itemvalue="Python.test1" />
       </list>
     </recent_temporary>
   </component>
@@ -493,8 +533,8 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11141453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32858595" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858595" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39877924" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -545,19 +585,84 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/server.py</url>
+          <line>145</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/cilentFunc.py">
+    <entry file="file://$PROJECT_DIR$/test/clientFunc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1260">
+          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/clientSignup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3636">
+          <caret line="101" column="29" lean-forward="true" selection-start-line="96" selection-start-column="16" selection-end-line="101" selection-end-column="29" />
+          <folding>
+            <element signature="e#194#236#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/pymysqltest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/clientChat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#192#227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/clientMain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4932">
+          <caret line="144" column="36" lean-forward="false" selection-start-line="144" selection-start-column="36" selection-end-line="144" selection-end-column="36" />
+          <folding>
+            <element signature="e#197#239#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3780">
+          <caret line="113" column="19" lean-forward="true" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+          <folding>
+            <element signature="e#38#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/cilentFunc.py" />
     <entry file="file://$PROJECT_DIR$/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -603,43 +708,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py" />
-    <entry file="file://$PROJECT_DIR$/client/cilentFunc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/singup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/clientSingup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1926">
-          <caret line="76" column="36" lean-forward="true" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/client/cilentFunc.py" />
+    <entry file="file://$PROJECT_DIR$/test/singup.py" />
+    <entry file="file://$PROJECT_DIR$/test/clientSingup.py" />
     <entry file="file://$PROJECT_DIR$/Func/spider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
           <caret line="66" column="6" lean-forward="false" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/pymysqltest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
+        <state relative-caret-position="288">
           <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -647,10 +728,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="43" column="25" lean-forward="true" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/clientSignup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3636">
-          <caret line="101" column="29" lean-forward="true" selection-start-line="96" selection-start-column="16" selection-end-line="101" selection-end-column="29" />
+        <state relative-caret-position="396">
+          <caret line="171" column="3" lean-forward="false" selection-start-line="171" selection-start-column="3" selection-end-line="171" selection-end-column="3" />
           <folding>
             <element signature="e#194#236#0" expanded="true" />
           </folding>
@@ -659,26 +756,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/clientChat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="155" column="11" lean-forward="false" selection-start-line="155" selection-start-column="11" selection-end-line="155" selection-end-column="11" />
+        <state relative-caret-position="1444">
+          <caret line="163" column="22" lean-forward="true" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
           <folding>
-            <element signature="e#192#234#0" expanded="true" />
+            <element signature="e#192#227#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/clientFunc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+        <state relative-caret-position="439">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="881" column="0" lean-forward="false" selection-start-line="881" selection-start-column="0" selection-end-line="881" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/chatNew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/clientMain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="140" column="35" lean-forward="true" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+        <state relative-caret-position="1123">
+          <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="e#197#239#0" expanded="true" />
           </folding>
@@ -687,8 +800,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="122" column="68" lean-forward="false" selection-start-line="122" selection-start-column="68" selection-end-line="122" selection-end-column="68" />
+        <state relative-caret-position="223">
+          <caret line="157" column="48" lean-forward="false" selection-start-line="157" selection-start-column="48" selection-end-line="157" selection-end-column="48" />
           <folding>
             <element signature="e#38#51#0" expanded="true" />
           </folding>

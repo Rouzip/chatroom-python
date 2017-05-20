@@ -8,11 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+import time
 import logging
 
 from clientFunc import clientChat
 from clientSignup import Ui_Dialog
-from chatNew import chatWindow
+from clientChat import  Ui_chating
 
 class Ui_mainWindow(object):
     def __init__(self, clientChat):
@@ -126,6 +127,7 @@ class Ui_mainWindow(object):
                 return
             self.client.sendMessage(name + ' ' + password)
             responseByte = self.client.recvMsg()
+            print(responseByte)
             if responseByte == b'\xe5\xa4\xb1\xe8\xb4\xa5\xef\xbc\x91':
                 error = QMessageBox()
                 error.setIcon(QMessageBox.Warning)
@@ -151,13 +153,11 @@ class Ui_mainWindow(object):
                 error.exec_()
                 return
             self.client.initName(name)
-
-            Dialog = QtWidgets.QDialog()
-            ui = chatWindow(self.client)
-            ui.setupUi(Dialog)
-            Dialog.show()
-            Dialog.exec_()
-
+            chating = QtWidgets.QWidget()
+            ui = Ui_chating(self.client)
+            ui.setupUi(chating)
+            chating.show()
+            
         except Exception as e:
             logging.exception(e)
 

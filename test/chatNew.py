@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'chat.ui'
+# Form implementation generated from reading ui file 'chatNew.ui'
 #
 # Created by: PyQt5 UI code generator 5.8.2
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QPixmap
 import datetime
 import random
@@ -16,8 +17,7 @@ from bs4 import BeautifulSoup
 from collections import deque
 import logging
 import os
-from threading import Thread
-
+from threading import Thread, Lock
 
 from clientFunc import clientChat
 
@@ -40,7 +40,8 @@ nameSet = set()
 visited = set()
 
 
-class Ui_chating(object):
+class chatWindow(object):
+
     def __init__(self, clientChat):
         def pictureSpider(url, visited, nameSet):
             # 存放要遍历的网站
@@ -77,7 +78,7 @@ class Ui_chating(object):
                             if photoUrl and photoName not in nameSet:
                                 photo = requests.session().get(
                                     photoUrl, headers=head, timeout=Timeout)
-                                with open(path + photoName + '.jpg', 'wb') as fp:
+                                with open(path+photoName+'.jpg', 'wb') as fp:
                                     fp.write(photo.content)
                                 nameSet.add(photoName)
                             pictureNum = os.listdir(
@@ -86,66 +87,69 @@ class Ui_chating(object):
                                 return
                         except Exception as g:
                             logging.exception(g)
-                except Exception as e:
+                except Exception:
                     pass
         self.client = clientChat
         pictureSpider(url, visited, nameSet)
-        Thread(target=self.receive).start()
+        # 消息暂存变量
+        self.message = []
+        # 锁变量
+        self.q = Lock()
+        self.time = QTimer()
+        try:
+            Thread(target=self.receive).start()
+        except Exception as e:
+            logging.exception(e)
 
-
-    def setupUi(self, chating):
-        chating.setObjectName("chating")
-        chating.resize(967, 664)
-        self.sendmsg_textEdit = QtWidgets.QTextEdit(chating)
-        self.sendmsg_textEdit.setGeometry(QtCore.QRect(30, 480, 611, 151))
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(866, 749)
+        self.chatmsg_textEdit = QtWidgets.QTextEdit(Dialog)
+        self.chatmsg_textEdit.setGeometry(QtCore.QRect(50, 30, 471, 471))
+        self.chatmsg_textEdit.setObjectName("chatmsg_textEdit")
+        self.sendmsg_textEdit = QtWidgets.QTextEdit(Dialog)
+        self.sendmsg_textEdit.setGeometry(QtCore.QRect(50, 520, 471, 201))
         self.sendmsg_textEdit.setObjectName("sendmsg_textEdit")
-        self.chatmsg_textEdit = QtWidgets.QTextEdit(chating)
-        self.chatmsg_textEdit.setGeometry(QtCore.QRect(30, 30, 611, 411))
-        self.chatmsg_textEdit.setObjectName("chatmsg_textEditl")
-        self.send_btn = QtWidgets.QPushButton(chating)
-        self.send_btn.setGeometry(QtCore.QRect(720, 520, 99, 27))
+        self.send_btn = QtWidgets.QPushButton(Dialog)
+        self.send_btn.setGeometry(QtCore.QRect(640, 570, 99, 27))
         self.send_btn.setObjectName("send_btn")
-        self.clear_btn = QtWidgets.QPushButton(chating)
-        self.clear_btn.setGeometry(QtCore.QRect(720, 580, 99, 27))
+        self.clear_btn = QtWidgets.QPushButton(Dialog)
+        self.clear_btn.setGeometry(QtCore.QRect(640, 650, 99, 27))
         self.clear_btn.setObjectName("clear_btn")
-        self.label = QtWidgets.QLabel(chating)
-        self.label.setGeometry(QtCore.QRect(670, 40, 251, 421))
-        self.label.setObjectName("label")
+        self.image_label = QtWidgets.QLabel(Dialog)
+        self.image_label.setGeometry(QtCore.QRect(570, 80, 231, 291))
+        self.image_label.setText("")
+        self.image_label.setObjectName("image_label")
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
         pixmap = self.randomPic()
 
-        self.label.setPixmap(pixmap.scaled(200, 300, 0))
-
-        self.retranslateUi(chating)
-        QtCore.QMetaObject.connectSlotsByName(chating)
-
+        self.image_label.setPixmap(pixmap.scaled(200, 300, 0))
         ################事件处理函数###################
         self.clear_btn.clicked.connect(self.clean)
         self.send_btn.clicked.connect(self.send)
+        self.time.timeout.connect(self.receiveMsg)
+        self.time.start(10)
+
+    def receiveMsg(self):
+        #################消息显示#########################
+        if not len(self.message):
+            pass
+        else:
+            for pos, msg in enumerate(self.message):
+                self.q.acquire()
+                self.chatmsg_textEdit.append(msg)
+                self.message.pop(pos-1)
+                self.q.release()
 
 
-    # 发送聊天窗口中的消息，并将消息清除
-    def send(self):
-        message = self.chatmsg_textEdit.toPlainText()
-        print(message)
-        self.client.sendMessage(message)
-        self.clean()
-
-
-    # 清除聊天窗口中自己发送的消息
-    def clean(self):
-        self.sendmsg_textEdit.clear()
-
-    # 接受到socket的信息，然后拼接到chatmsg_textEdit之上。
-    def receive(self):
-        message = str(self.client.recvMsg(), encoding='utf-8')
-        self.chatmsg_textEdit.append(message)
-
-
-    def retranslateUi(self, chating):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        chating.setWindowTitle(_translate("chating", "聊天窗口"))
-        self.send_btn.setText(_translate("chating", "发送"))
-        self.clear_btn.setText(_translate("chating", "清除"))
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.send_btn.setText(_translate("Dialog", "发送"))
+        self.clear_btn.setText(_translate("Dialog", "清除"))
 
     #　随机函数挑选出 放在label中的图片
     def randomPic(self):
@@ -156,7 +160,28 @@ class Ui_chating(object):
         pixmap = QPixmap('/home/rouzip/chatroom-python/picture/' + pictureName)
         return pixmap
 
+    # 发送自己的消息，并将消息清除
+    def send(self):
+        try:
+            message = self.sendmsg_textEdit.toPlainText()
+            self.client.sendMessage(message)
+            self.clean()
+        except Exception as e:
+            logging.exception(e)
 
+    # 清除聊天窗口中自己发送的消息
+    def clean(self):
+        self.sendmsg_textEdit.clear()
+
+    # 接受到socket的信息，然后拼接到chatmsg_textEdit之上。
+    def receive(self):
+        try:
+            while True:
+                messageByte = self.client.recvMsg()
+                message = str(messageByte, encoding='utf-8')
+                self.message.append(message)
+        except Exception as e:
+            logging.exception(e)
 
     # 退出的时候向服务器发送退出信息
     def closeEvent(self, event):
@@ -168,9 +193,10 @@ class Ui_chating(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    chating = QtWidgets.QWidget()
+    Dialog = QtWidgets.QDialog()
     client = clientChat()
-    ui = Ui_chating(client)
-    ui.setupUi(chating)
-    chating.show()
+    client.initName('a')
+    ui = chatWindow(client)
+    ui.setupUi(Dialog)
+    Dialog.show()
     sys.exit(app.exec_())
