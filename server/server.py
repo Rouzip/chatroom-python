@@ -10,8 +10,8 @@ import logging
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import time
 import pymysql
+import hashlib
 
 
 '''
@@ -81,17 +81,20 @@ class serverChat():
                 if len(dataInDb) > 0:
                     # 数据已存在，发送标志失败0
                     socket.send(bytes('失败', encoding='utf-8'))
-                    print('发送成功')
-                    print('注册失败')
                     return
                 else:
                     # 数据不存在，发送成功标志1
-                    print('注册成功')
                     socket.send(bytes('成功', encoding='utf-8'))
+                # hashList = []
+                # hashWord = hashlib.md5(bytes(password, encoding='utf-8'))
+                # for _ in range(1024):
+                #     word = hashWord.hexdigest()
+                #     hashList.append(word)
+                #     hashWord = hashlib.md5(word.encode('utf-8')).hexdigest()
                 cursor.execute('insert into User values(%s,%s,%s)',
                                (name, email, password))
                 self.dbconn.commit()
-                # self.sendEmail(email)
+                self.sendEmail(email)
                 cursor.close()
                 return
             except Exception as e:
@@ -138,7 +141,7 @@ class serverChat():
             except Exception as e:
                 logging.exception(e)
         # 加入默认测试对象a，以后使用
-        def chat(clientName='a'):
+        def chat(clientName):
             try:
                 # 服务器将在线的人员维护在字典之中，方便转发消息
                 self.clientList[clientName] = socket
@@ -154,11 +157,12 @@ class serverChat():
                         continue
                     name = search.group(1)
                     message = search.group(2)
-                    if name not in self.clientList:
+
+                    if name == 'all':
+                        self.sendMessageAll(clientName, message)
+                    elif name not in self.clientList:
                         socket.send(bytes('此人未登录', encoding='utf-8'))
                         continue
-                    elif name == 'all':
-                        self.sendMessageAll(clientName, message)
                     else:
                         self.sendMessagePrivate(clientName, name, message)
                 else:
@@ -172,29 +176,11 @@ class serverChat():
             if msgType == '注册':
                 signup()
             else:
-                # name = login()
-                # if not name:
-                #     continue
-                # else:
-                #     chat()
-                chat()
-
-
-    # 向客户端报错
-    # 出错的原因一个是因为格式不对或者已经被使用，一个是聊天的时候目标不在list中
-    def sendError(self, clientSocket, num):
-        try:
-            if num == 0:
-                # 注册失败
-                clientSocket.send(bytes(0))
-            elif num == 1:
-                # 数据库中无此人
-                clientSocket.send(bytes(1))
-            else:
-                # 登录字典已有此人
-                clientSocket.send(bytes(2))
-        except Exception as e:
-            logging.exception(e)
+                name = login()
+                if not name:
+                    continue
+                else:
+                    chat(name)
 
     # 发送全体信息
     def sendMessageAll(self, clientName, message):
@@ -215,7 +201,10 @@ class serverChat():
     # 从字典之中找到需要发送的客户名字，从字典中找到socket，然后发送消息
     def sendMessagePrivate(self, clientName, name, message):
         try:
-            self.clientList[name].send(bytes(name + ': ' + message,
+            if name == clientName:
+                self.clientList[name].send(bytes('发送错误',
+                                                 encoding='utf-8'))
+            self.clientList[name].send(bytes(clientName + ': ' + message,
                                              encoding='utf-8'))
             self.clientList[clientName].send(bytes('me: ' + message,
                                                    encoding='utf-8'))
@@ -254,7 +243,7 @@ class serverChat():
 
             # 构建发送地址与具体实现发送
             fromAddr = 'rouzipking@gmail.com'
-            password = 'wevewwssrlrhetku'
+            password = 'wrsilbyoyjfpoign'
             desAddr = desAddr
             smtpServer = 'smtp.gmail.com'
             server = smtplib.SMTP(smtpServer, 587)

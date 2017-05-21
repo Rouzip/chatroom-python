@@ -186,7 +186,6 @@ class chatWindow(object):
     # 退出的时候向服务器发送退出信息
     def closeEvent(self, event):
         self.client.sendMessage(bytes('quit', encoding='utf-8'))
-        event.accept()
 
 
 
