@@ -10,6 +10,7 @@ import logging
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 import pymysql
 import hashlib
 
@@ -35,7 +36,7 @@ class serverChat():
                                       charset='utf8')
         # 线程池，并行处理信息
         self.threads = ThreadPoolExecutor(max_workers=100)
-        # 线程表，添加用户及其地址
+        # 线程表，添加用户及其socket地址
         self.clientList = {}
 
     # 服务器循环等待客户上线
@@ -56,10 +57,6 @@ class serverChat():
         self.clientList.pop(cilentName)
 
     # 处理消息
-    '''
-    改进:需要分成两个函数，一个连接注册函数进行处理，一个进行聊天处理
-    '''
-
     def recMsg(self, socket):
 
         def signup():
@@ -85,16 +82,30 @@ class serverChat():
                 else:
                     # 数据不存在，发送成功标志1
                     socket.send(bytes('成功', encoding='utf-8'))
-                # hashList = []
-                # hashWord = hashlib.md5(bytes(password, encoding='utf-8'))
-                # for _ in range(1024):
-                #     word = hashWord.hexdigest()
-                #     hashList.append(word)
-                #     hashWord = hashlib.md5(word.encode('utf-8')).hexdigest()
+                '''
+                暂时性思路，在服务器本地创建一个文件然后添加到邮件的附件之中，在发送之后，删除本地文件。
+                '''
+
+                md5 = hashlib.md5(password.encode('utf-8'))
+                md5Data = md5.hexdigest()
+                try:
+                    with open(name+'.txt', 'w') as fp:
+                        fp.write(password+'\n')
+                        # 设置hash链的长度为1024
+                        for _ in range(1023):
+                            fp.write(md5Data+'\n')
+                            md5Data = hashlib.md5(
+                                md5Data.encode('utf-8')).hexdigest()
+                        else:
+                            # 最后一个值服务器进行保存
+                            password = md5Data
+                except Exception as e:
+                    logging.exception(e)
+
                 cursor.execute('insert into User values(%s,%s,%s)',
                                (name, email, password))
                 self.dbconn.commit()
-                self.sendEmail(email)
+                self.sendEmail(email, name)
                 cursor.close()
                 return
             except Exception as e:
@@ -116,7 +127,6 @@ class serverChat():
                 分别发送失败1,2,3
                 '''
 
-
                 if not len(dataInDb):
                     socket.send(bytes('失败１', encoding='utf-8'))
                     return
@@ -136,7 +146,6 @@ class serverChat():
                 socket.send(bytes('成功', encoding='utf-8'))
                 print('进入聊天模式')
                 return clientName
-
 
             except Exception as e:
                 logging.exception(e)
@@ -213,9 +222,18 @@ class serverChat():
 
     #　根据client的邮件地址发送邮件
 
-    def sendEmail(self, desAddr):
+    def sendEmail(self, desAddr, name):
         def makeEmail():
+            # 创建邮件主容器
             email = MIMEMultipart('alternative')
+            # 添加密码附件
+            with open(name+'txt', 'r') as fp:
+                password = MIMEApplication(fp.read())
+                password.add_header('Content-Disposition',
+                                    'attachment', filename=name+'.txt')
+                email.attach(password)
+
+            # 创建html主题
             message = MIMEText('您已经注册成功', 'plain', 'utf-8')
             email.attach(message)
             html = MIMEText(

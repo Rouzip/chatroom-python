@@ -79,12 +79,12 @@ class Ui_mainWindow(object):
 
         self.center()
 
-    def center(self):  #主窗口居中显示函数
+    def center(self):  # 主窗口居中显示函数
 
         screen = QDesktopWidget().screenGeometry()
         size = mainWindow.geometry()
         mainWindow.move((screen.width()-size.width())/2,
-                  (screen.height()-size.height())/2)
+                        (screen.height()-size.height())/2)
 
     def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -138,6 +138,19 @@ class Ui_mainWindow(object):
                 error.setStandardButtons(QMessageBox.Ok)
                 error.exec_()
                 return
+            with open(os.getcwd()+'/'+name+'.txt', 'r') as fp:
+                passwordLoc = fp.readline().strip()
+                if password != passwordLoc:
+                    # 检测是否输入正确的密码
+                    error = QMessageBox()
+                    error.setIcon(QMessageBox.Warning)
+                    error.setWindowTitle('错误！')
+                    error.setText('密码错误！')
+                    error.setStandardButtons(QMessageBox.Ok)
+                    error.exec_()
+                    return
+                passwordList = fp.read().split('\n')
+
             self.client.sendMessage(name + ' ' + password)
             responseByte = self.client.recvMsg()
             if responseByte == b'\xe5\xa4\xb1\xe8\xb4\xa5\xef\xbc\x91':
@@ -149,6 +162,7 @@ class Ui_mainWindow(object):
                 error.exec_()
                 return
             if responseByte == b'\xe5\xa4\xb1\xe8\xb4\xa5\xef\xbc\x92':
+                # 检测是否被人重放攻击
                 error = QMessageBox()
                 error.setIcon(QMessageBox.Warning)
                 error.setWindowTitle('错误！')
