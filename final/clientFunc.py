@@ -38,7 +38,6 @@ class clientChat():
 
     def recvMsg(self)->bytes:
         message = self._socket.recv(1024)
-        print(message)
         return message
 
     # 聊天时死循环接受服务器发送的消息

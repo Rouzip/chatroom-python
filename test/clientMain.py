@@ -9,6 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 import logging
+import os
 
 from clientFunc import clientChat
 from clientSignup import Ui_Dialog
@@ -138,46 +139,46 @@ class Ui_mainWindow(object):
                 error.setStandardButtons(QMessageBox.Ok)
                 error.exec_()
                 return
-            passwordList = None
+            passwordList = []
             '''
             从hash链中倒置使用，发送密码
             '''
-            with open(os.getcwd()+'/'+name+'.txt', 'r') as fp:
-                passwordLoc = fp.readline().strip()
-                if password != passwordLoc:
-                    # 检测是否输入正确的密码
-                    '''
-                    我的构想本程序只是用于加密信道的传输，密码只是为了不是误操作
-                    和不是别人登录自己的账号，以后skey协议应该还可以改进
+            try:
+                with open(os.getcwd()+'/'+name+'.txt', 'r') as fp:
+                    passwordLoc = fp.readline().strip()
 
-                    '''
-                    error = QMessageBox()
-                    error.setIcon(QMessageBox.Warning)
-                    error.setWindowTitle('错误！')
-                    error.setText('密码错误！')
-                    error.setStandardButtons(QMessageBox.Ok)
-                    error.exec_()
-                    return
-                passwordList = fp.read().split('\n')
-                for pos, line in enumerate(passwordList):
-                    if line.find('使用') != -1:
-                        password = line.strip()
-                        if pos - 1 == 0:
-                            error = QMessageBox()
-                            error.setIcon(QMessageBox.Warning)
-                            error.setWindowTitle('错误！')
-                            error.setText('hash链已使用完！')
-                            error.setStandardButtons(QMessageBox.Ok)
-                            error.exec_()
-                            return
-                        passwordList.pop(pos)
-                        passwordList[pos - 1] = passwordList[pos - 1] + ' 使用'
-            with open(os.getcwd()+'/'+name+'.txt', 'w') as fp:
-                for line in filter(lambda w: w != passwordList[-1],
-                                   passwordList):
-                    fp.write(line+'\n')
-                else:
-                    fp.write(passwordList[-1]+' 使用')
+                    if password != passwordLoc:
+                        # 检测是否输入正确的密码
+                        '''
+                        我的构想本程序只是用于加密信道的传输，密码只是为了不是误操作
+                        和不是别人登录自己的账号，以后skey协议应该还可以改进
+
+                        '''
+                        error = QMessageBox()
+                        error.setIcon(QMessageBox.Warning)
+                        error.setWindowTitle('错误！')
+                        error.setText('密码错误！')
+                        error.setStandardButtons(QMessageBox.Ok)
+                        error.exec_()
+                        return
+                    passwordList.append(passwordLoc)
+                    passwordList += fp.read().split('\n')
+                    for pos, line in enumerate(passwordList):
+                        if line.find('usethis') != -1:
+                            password = line.strip()
+                            if pos - 1 == 0:
+                                error = QMessageBox()
+                                error.setIcon(QMessageBox.Warning)
+                                error.setWindowTitle('错误！')
+                                error.setText('hash链已使用完！')
+                                error.setStandardButtons(QMessageBox.Ok)
+                                error.exec_()
+                                return
+                            password = passwordList.pop(pos)[:32]
+                            passwordList[pos - 1] += (' usethis')
+
+            except Exception as e:
+                logging.exception(e)
 
             self.client.sendMessage(name + ' ' + password)
             responseByte = self.client.recvMsg()
@@ -207,6 +208,15 @@ class Ui_mainWindow(object):
                 error.exec_()
                 return
             self.client.initName(name)
+            try:
+                with open(os.getcwd()+'/'+name+'.txt', 'w') as fp:
+                    for line in filter(lambda w: w != passwordList[-1],
+                                       passwordList):
+                        fp.write(line+'\n')
+                    else:
+                        fp.write(passwordList[-1])
+            except Exception as e:
+                logging.exception(e)
 
             Dialog = QtWidgets.QDialog()
             ui = chatWindow(self.client)
