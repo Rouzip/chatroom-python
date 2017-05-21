@@ -138,10 +138,19 @@ class Ui_mainWindow(object):
                 error.setStandardButtons(QMessageBox.Ok)
                 error.exec_()
                 return
+            passwordList = None
+            '''
+            从hash链中倒置使用，发送密码
+            '''
             with open(os.getcwd()+'/'+name+'.txt', 'r') as fp:
                 passwordLoc = fp.readline().strip()
                 if password != passwordLoc:
                     # 检测是否输入正确的密码
+                    '''
+                    我的构想本程序只是用于加密信道的传输，密码只是为了不是误操作
+                    和不是别人登录自己的账号，以后skey协议应该还可以改进
+
+                    '''
                     error = QMessageBox()
                     error.setIcon(QMessageBox.Warning)
                     error.setWindowTitle('错误！')
@@ -150,6 +159,25 @@ class Ui_mainWindow(object):
                     error.exec_()
                     return
                 passwordList = fp.read().split('\n')
+                for pos, line in enumerate(passwordList):
+                    if line.find('使用') != -1:
+                        password = line.strip()
+                        if pos - 1 == 0:
+                            error = QMessageBox()
+                            error.setIcon(QMessageBox.Warning)
+                            error.setWindowTitle('错误！')
+                            error.setText('hash链已使用完！')
+                            error.setStandardButtons(QMessageBox.Ok)
+                            error.exec_()
+                            return
+                        passwordList.pop(pos)
+                        passwordList[pos - 1] = passwordList[pos - 1] + ' 使用'
+            with open(os.getcwd()+'/'+name+'.txt', 'w') as fp:
+                for line in filter(lambda w: w != passwordList[-1],
+                                   passwordList):
+                    fp.write(line+'\n')
+                else:
+                    fp.write(passwordList[-1]+' 使用')
 
             self.client.sendMessage(name + ' ' + password)
             responseByte = self.client.recvMsg()

@@ -13,6 +13,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import pymysql
 import hashlib
+import subprocess
 
 
 '''
@@ -88,6 +89,7 @@ class serverChat():
 
                 md5 = hashlib.md5(password.encode('utf-8'))
                 md5Data = md5.hexdigest()
+                print(name)
                 try:
                     with open(name+'.txt', 'w') as fp:
                         fp.write(password+'\n')
@@ -98,6 +100,9 @@ class serverChat():
                                 md5Data.encode('utf-8')).hexdigest()
                         else:
                             # 最后一个值服务器进行保存
+                            fp.write(md5Data+' 使用')
+                            md5Data = hashlib.md5(
+                                md5Data.encode('utf-8')).hexdigest()
                             password = md5Data
                 except Exception as e:
                     logging.exception(e)
@@ -115,6 +120,7 @@ class serverChat():
             try:
                 loginInfo = str(msgType).split(' ')
                 clientName, password = loginInfo[0], loginInfo[1]
+                password = hashlib.md5(password.encode('utf-8')).hexdigest()
                 cursor = self.dbconn.cursor()
                 cursor.execute('use test')
                 cursor.execute('select name,password from User where name=%s',
@@ -149,7 +155,7 @@ class serverChat():
 
             except Exception as e:
                 logging.exception(e)
-        # 加入默认测试对象a，以后使用
+
         def chat(clientName):
             try:
                 # 服务器将在线的人员维护在字典之中，方便转发消息
@@ -227,12 +233,13 @@ class serverChat():
             # 创建邮件主容器
             email = MIMEMultipart('alternative')
             # 添加密码附件
-            with open(name+'txt', 'r') as fp:
+            with open(name+'.txt', 'r') as fp:
                 password = MIMEApplication(fp.read())
                 password.add_header('Content-Disposition',
                                     'attachment', filename=name+'.txt')
                 email.attach(password)
-
+            # 从服务器端删除多余的计算出来的hash链
+            subprocess.run(['rm', name+'.txt'])
             # 创建html主题
             message = MIMEText('您已经注册成功', 'plain', 'utf-8')
             email.attach(message)
