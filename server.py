@@ -26,19 +26,20 @@ import subprocess
 class serverChat():
     # 初始化服务器，建立客户列表
 
-    def __init__(self, user, password):
+    def __init__(self, user, dbPassword, emailPassword):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind(('127.0.0.1', 5000))
         self.socket.listen(100)
         self.dbconn = pymysql.connect(host='127.0.0.1',
                                       user=user,
-                                      password=password,
+                                      password=dbPassword,
                                       db='mysql',
                                       charset='utf8')
         # 线程池，并行处理信息
         self.threads = ThreadPoolExecutor(max_workers=100)
         # 线程表，添加用户及其socket地址
         self.clientList = {}
+        self.emailPassword = emailPassword
 
     # 服务器循环等待客户上线
     # 使用多线程tcp连接
@@ -281,7 +282,7 @@ class serverChat():
 
             # 构建发送地址与具体实现发送
             fromAddr = 'rouzipking@gmail.com'
-            password = 'wrsilbyoyjfpoign'
+            password = self.emailPassword
             desAddr = desAddr
             smtpServer = 'smtp.gmail.com'
             server = smtplib.SMTP(smtpServer, 587)
@@ -303,7 +304,9 @@ class serverChat():
 
 
 if __name__ == '__main__':
-    user = 'root'  # input('your db user name:')
-    password = 'vtzf2123+'  # input('your db password:')
-    with serverChat(user=user, password=password) as server:
+    user = input('your db user name:')
+    dbPassword = input('your db password:')
+    emailPassword = input('your email password:')
+    with serverChat(user=user, dbPassword=dbPassword,
+                    emailPassword=emailPassword) as server:
         server.serverRun()
