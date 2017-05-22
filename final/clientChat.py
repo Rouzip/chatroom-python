@@ -90,7 +90,7 @@ class chatWindow(object):
                 except Exception:
                     pass
         self.client = clientChat
-        pictureSpider(url, visited, nameSet)
+        # pictureSpider(url, visited, nameSet)
         # 消息暂存变量
         self.message = []
         # 锁变量

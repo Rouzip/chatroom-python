@@ -13,7 +13,7 @@ import os
 
 from clientFunc import clientChat
 from clientSignup import Ui_Dialog
-from chatNew import chatWindow
+from clientChat import chatWindow
 
 
 class Ui_mainWindow(object):
@@ -224,6 +224,7 @@ class Ui_mainWindow(object):
             Dialog.show()
             mainWindow.hide()
             Dialog.exec_()
+            Dialog.close.connect(self.action_close)
 
         except Exception as e:
             logging.exception(e)
@@ -244,3 +245,4 @@ if __name__ == "__main__":
     ui.setupUi(mainWindow)
     mainWindow.show()
     sys.exit(app.exec_())
+
