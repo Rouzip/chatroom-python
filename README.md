@@ -3,7 +3,7 @@ my test for computer network
 
 ---
 
-系统环境：Ubuntu16.04
+>系统环境：Ubuntu16.04
 数据库：mysql Ver 14.14 Distrib 5.7.18, for Linux (x86_64)
 相关包依赖：
 pyqt5
