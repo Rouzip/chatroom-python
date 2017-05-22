@@ -51,12 +51,13 @@ class serverChat():
                 logging.exception(e)
 
     # 收到客户下线，关闭socket连接，将其从列表中删除
-    def cilentQuit(self, cilentName):
+    def cilentQuit(self, clientName):
         for name, socket in self.clientList.items():
             if name != clientName:
-                socket.send(bytes(cilentName + ' has left!', encoding='utf-8'))
-        self.clientList[cilentName].close()
-        self.clientList.pop(cilentName)
+                socket.send(bytes(clientName + ' has left!', encoding='utf-8'))
+        self.clientList[clientName].close()
+        self.clientList.pop(clientName)
+        print(clientName+'has quit')
 
     # 处理消息
     def recMsg(self, socket):

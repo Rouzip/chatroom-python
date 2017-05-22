@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, pyqtSignal, QCoreApplication, QObject
 from PyQt5.QtGui import QPixmap
 import datetime
 import random
@@ -40,9 +40,13 @@ nameSet = set()
 visited = set()
 
 
-class chatWindow(object):
+class Communication(QObject):
+    closeApp = pyqtSignal()
 
-    def __init__(self, clientChat):
+
+class chatWindow(QtWidgets.QDialog):
+
+    def __init__(self, clientChat, parrent=None):
         def pictureSpider(url, visited, nameSet):
             # 存放要遍历的网站
             stack = deque()
@@ -89,40 +93,42 @@ class chatWindow(object):
                             logging.exception(g)
                 except Exception:
                     pass
+        super(chatWindow, self).__init__(parrent)
         self.client = clientChat
-        # pictureSpider(url, visited, nameSet)
+        pictureSpider(url, visited, nameSet)
         # 消息暂存变量
         self.message = []
         # 锁变量
         self.q = Lock()
         self.time = QTimer()
+        self.close = Communication()
+        self.ifRecv = True
         try:
             Thread(target=self.receive).start()
         except Exception as e:
             logging.exception(e)
 
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(866, 749)
-        self.chatmsg_textEdit = QtWidgets.QTextEdit(Dialog)
+        self.setObjectName("Dialog")
+        self.resize(866, 749)
+        self.chatmsg_textEdit = QtWidgets.QTextEdit(self)
         self.chatmsg_textEdit.setGeometry(QtCore.QRect(50, 30, 471, 471))
         self.chatmsg_textEdit.setObjectName("chatmsg_textEdit")
-        self.sendmsg_textEdit = QtWidgets.QTextEdit(Dialog)
+        self.sendmsg_textEdit = QtWidgets.QTextEdit(self)
         self.sendmsg_textEdit.setGeometry(QtCore.QRect(50, 520, 471, 201))
         self.sendmsg_textEdit.setObjectName("sendmsg_textEdit")
-        self.send_btn = QtWidgets.QPushButton(Dialog)
+        self.send_btn = QtWidgets.QPushButton(self)
         self.send_btn.setGeometry(QtCore.QRect(640, 570, 99, 27))
         self.send_btn.setObjectName("send_btn")
-        self.clear_btn = QtWidgets.QPushButton(Dialog)
+        self.clear_btn = QtWidgets.QPushButton(self)
         self.clear_btn.setGeometry(QtCore.QRect(640, 650, 99, 27))
         self.clear_btn.setObjectName("clear_btn")
-        self.image_label = QtWidgets.QLabel(Dialog)
+        self.image_label = QtWidgets.QLabel(self)
         self.image_label.setGeometry(QtCore.QRect(570, 80, 231, 291))
         self.image_label.setText("")
         self.image_label.setObjectName("image_label")
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi()
+        # QtCore.QMetaObject.connectSlotsByName(self)
 
         pixmap = self.randomPic()
 
@@ -130,6 +136,7 @@ class chatWindow(object):
         ################事件处理函数###################
         self.clear_btn.clicked.connect(self.clean)
         self.send_btn.clicked.connect(self.send)
+        self.close.closeApp.connect(parrent.close)
         self.time.timeout.connect(self.receiveMsg)
         self.time.start(10)
 
@@ -144,10 +151,9 @@ class chatWindow(object):
                 self.message.pop(pos-1)
                 self.q.release()
 
-
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.setWindowTitle(_translate("Dialog", "Chatroom"))
         self.send_btn.setText(_translate("Dialog", "发送"))
         self.clear_btn.setText(_translate("Dialog", "清除"))
 
@@ -164,6 +170,8 @@ class chatWindow(object):
     def send(self):
         try:
             message = self.sendmsg_textEdit.toPlainText()
+            if message == 'close':
+                self.close()
             self.client.sendMessage(message)
             self.clean()
         except Exception as e:
@@ -176,7 +184,7 @@ class chatWindow(object):
     # 接受到socket的信息，然后拼接到chatmsg_textEdit之上。
     def receive(self):
         try:
-            while True:
+            while self.ifRecv:
                 messageByte = self.client.recvMsg()
                 message = str(messageByte, encoding='utf-8')
                 self.message.append(message)
@@ -185,17 +193,17 @@ class chatWindow(object):
 
     # 退出的时候向服务器发送退出信息
     def closeEvent(self, event):
-        self.client.sendMessage(bytes('quit', encoding='utf-8'))
-
+        self.client.sendMessage('quit')
+        print('子程序关闭啦')
+        self.ifRecv = False
+        self.close.closeApp.emit()
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
     client = clientChat()
     client.initName('a')
     ui = chatWindow(client)
-    ui.setupUi(Dialog)
-    Dialog.show()
+    ui.show()
     sys.exit(app.exec_())

@@ -51,11 +51,13 @@ class serverChat():
                 logging.exception(e)
 
     # 收到客户下线，关闭socket连接，将其从列表中删除
-    def cilentQuit(self, cilentName):
-        self.clientList[cilentName].close()
+    def cilentQuit(self, clientName):
         for name, socket in self.clientList.items():
-            socket.send(bytes(cilentName + ' has left!', encoding='utf-8'))
-        self.clientList.pop(cilentName)
+            if name != clientName:
+                socket.send(bytes(clientName + ' has left!', encoding='utf-8'))
+        self.clientList[clientName].close()
+        self.clientList.pop(clientName)
+        print(clientName+'has quit')
 
     # 处理消息
     def recMsg(self, socket):
@@ -120,7 +122,8 @@ class serverChat():
             try:
                 loginInfo = str(msgType).split(' ')
                 clientName, passwordInit = loginInfo[0], loginInfo[1]
-                password = hashlib.md5(passwordInit.encode('utf-8')).hexdigest()
+                password = hashlib.md5(
+                    passwordInit.encode('utf-8')).hexdigest()
 
                 cursor = self.dbconn.cursor()
                 cursor.execute('use test')
@@ -154,7 +157,7 @@ class serverChat():
                 cursor.execute('update User '
                                'set password=%s'
                                'where name=%s',
-                               (passwordInit,clientName))
+                               (passwordInit, clientName))
                 cursor.close()
                 self.dbconn.commit()
                 socket.send(bytes('成功', encoding='utf-8'))
@@ -204,6 +207,7 @@ class serverChat():
                     continue
                 else:
                     chat(name)
+                    return
 
     # 发送全体信息
     def sendMessageAll(self, clientName, message):
@@ -244,7 +248,8 @@ class serverChat():
             with open(name+'.txt', 'r', encoding='utf-8') as fp:
                 password = MIMEApplication(fp.read())
                 password.add_header('Content-Disposition',
-                                    'attachment', filename=name+'.txt')
+                                    'attachment',
+                                    filename=(name+'.txt').encode('utf-8'))
                 email.attach(password)
             # 从服务器端删除多余的计算出来的hash链
             subprocess.run(['rm', name+'.txt'])

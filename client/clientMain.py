@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'clientGUI.ui'
-#
-# Created by: PyQt5 UI code generator 5.8.2
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
+from PyQt5.QtWidgets import QWidget
 import logging
 import os
 
@@ -16,90 +9,71 @@ from clientSignup import Ui_Dialog
 from clientChat import chatWindow
 
 
-class Ui_mainWindow(object):
+class clientMain(QtWidgets.QWidget):
 
     def __init__(self, clientChat):
+        super(clientMain, self).__init__()
         self.client = clientChat
 
-    def setupUi(self, mainWindow):
-        mainWindow.setObjectName("mainWindow")
-        mainWindow.resize(800, 600)
+        self.setObjectName("mainWindow")
+        self.resize(799, 599)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(
-            "../下载/chat_128px_1201543_easyicon.net.ico"),
+            "../../下载/chat_128px_1201543_easyicon.net.ico"),
             QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        mainWindow.setWindowIcon(icon)
-        self.centralwidget = QtWidgets.QWidget(mainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.registerNmae = QtWidgets.QLabel(self.centralwidget)
-        self.registerNmae.setGeometry(QtCore.QRect(150, 170, 67, 16))
-        self.registerNmae.setObjectName("registerNmae")
-        self.password = QtWidgets.QLabel(self.centralwidget)
-        self.password.setGeometry(QtCore.QRect(150, 290, 67, 17))
-        self.password.setObjectName("password")
-        self.loginButton = QtWidgets.QPushButton(self.centralwidget)
-        self.loginButton.setGeometry(QtCore.QRect(240, 430, 99, 27))
-        self.loginButton.setObjectName("loginButton")
-        self.registerButton = QtWidgets.QPushButton(self.centralwidget)
-        self.registerButton.setGeometry(QtCore.QRect(500, 430, 99, 27))
-        self.registerButton.setObjectName("registerButton")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(300, 60, 271, 31))
+        self.setWindowIcon(icon)
+        self.label = QtWidgets.QLabel(self)
+        self.label.setGeometry(QtCore.QRect(290, 80, 271, 31))
         font = QtGui.QFont()
         font.setFamily("Tlwg Mono")
         font.setPointSize(22)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.userName = QtWidgets.QLineEdit(self.centralwidget)
-        self.userName.setGeometry(QtCore.QRect(310, 170, 191, 27))
+        self.password = QtWidgets.QLabel(self)
+        self.password.setGeometry(QtCore.QRect(200, 340, 67, 17))
+        self.password.setObjectName("password")
+        self.registerNmae = QtWidgets.QLabel(self)
+        self.registerNmae.setGeometry(QtCore.QRect(200, 210, 67, 16))
+        self.registerNmae.setObjectName("registerNmae")
+        self.registerButton = QtWidgets.QPushButton(self)
+        self.registerButton.setGeometry(QtCore.QRect(460, 470, 99, 27))
+        self.registerButton.setObjectName("registerButton")
+        self.loginButton = QtWidgets.QPushButton(self)
+        self.loginButton.setGeometry(QtCore.QRect(230, 470, 99, 27))
+        self.loginButton.setObjectName("loginButton")
+        self.userPassword = QtWidgets.QLineEdit(self)
+        self.userPassword.setGeometry(QtCore.QRect(410, 340, 191, 27))
+        self.userPassword.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.userPassword.setObjectName("userPassword")
+        self.userName = QtWidgets.QLineEdit(self)
+        self.userName.setGeometry(QtCore.QRect(410, 210, 191, 27))
         self.userName.setAcceptDrops(True)
         self.userName.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.userName.setObjectName("userName")
-        self.userPassword = QtWidgets.QLineEdit(self.centralwidget)
-        self.userPassword.setGeometry(QtCore.QRect(310, 290, 191, 27))
-        self.userPassword.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.userPassword.setObjectName("userPassword")
-        mainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(mainWindow)
-        self.statusbar.setObjectName("statusbar")
-        mainWindow.setStatusBar(self.statusbar)
-        self.action_close = QtWidgets.QAction(mainWindow)
-        self.action_close.setObjectName("action_close")
-        self.action_personalive = QtWidgets.QAction(mainWindow)
-        self.action_personalive.setObjectName("action_personalive")
-        self.action_login = QtWidgets.QAction(mainWindow)
-        self.action_login.setObjectName("action_login")
-        self.registerNmae.setBuddy(self.userName)
         self.password.setBuddy(self.userPassword)
+        self.registerNmae.setBuddy(self.userName)
 
-        self.retranslateUi(mainWindow)
-        QtCore.QMetaObject.connectSlotsByName(mainWindow)
-        mainWindow.setTabOrder(self.userName, self.userPassword)
-        mainWindow.setTabOrder(self.userPassword, self.loginButton)
-        mainWindow.setTabOrder(self.loginButton, self.registerButton)
+        self.retranslateUi()
+        # QtCore.QMetaObject.connectSlotsByName(self)
 
         self.center()
 
-    def center(self):  # 主窗口居中显示函数
+    # 主窗口居中显示函数
+    def center(self):
 
         screen = QDesktopWidget().screenGeometry()
-        size = mainWindow.geometry()
-        mainWindow.move((screen.width()-size.width())/2,
-                        (screen.height()-size.height())/2)
+        size = self.geometry()
+        self.move((screen.width()-size.width())/2,
+                  (screen.height()-size.height())/2)
 
-    def retranslateUi(self, mainWindow):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        mainWindow.setWindowTitle(_translate("mainWindow", "聊天室"))
-        self.registerNmae.setText(_translate("mainWindow", "用户名"))
-        self.password.setText(_translate("mainWindow", "密码"))
-        self.loginButton.setText(_translate("mainWindow", "登录"))
-        self.registerButton.setText(_translate("mainWindow", "注册"))
+        self.setWindowTitle(_translate("mainWindow", "Rouzip的聊天室"))
         self.label.setText(_translate("mainWindow", "Rouzip的聊天室"))
-        self.action_close.setText(_translate("mainWindow", "关闭"))
-        self.action_close.setShortcut(_translate("mainWindow", "Ctrl+W"))
-        self.action_personalive.setText(_translate("mainWindow", "在线人员"))
-        self.action_personalive.setShortcut(_translate("mainWindow", "Ctrl+S"))
-        self.action_login.setText(_translate("mainWindow", "登录"))
+        self.password.setText(_translate("mainWindow", "密码"))
+        self.registerNmae.setText(_translate("mainWindow", "用户名"))
+        self.registerButton.setText(_translate("mainWindow", "注册"))
+        self.loginButton.setText(_translate("mainWindow", "登录"))
 
         ###############事件处理函数#####################
         self.loginButton.clicked.connect(self.chat)
@@ -218,31 +192,21 @@ class Ui_mainWindow(object):
             except Exception as e:
                 logging.exception(e)
 
-            Dialog = QtWidgets.QDialog()
-            ui = chatWindow(self.client)
-            ui.setupUi(Dialog)
-            Dialog.show()
-            mainWindow.hide()
-            Dialog.exec_()
-            Dialog.close.connect(self.action_close)
+            chatroom = chatWindow(self.client, self)
+            chatroom.show()
+            self.hide()
+            chatroom.exec_()
 
         except Exception as e:
             logging.exception(e)
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.client.sendMessage(bytes('quit', encoding='utf-8'))
-
+    def closeEvent(self, event):
+        print('关闭啦')
 
 if __name__ == "__main__":
     import sys
-    client = clientChat()
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = QtWidgets.QMainWindow()
-    ui = Ui_mainWindow(client)
-    ui.setupUi(mainWindow)
-    mainWindow.show()
+    client = clientChat()
+    msgBox = clientMain(clientChat=client)
+    msgBox.show()
     sys.exit(app.exec_())
-
