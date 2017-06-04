@@ -313,9 +313,9 @@ class serverChat():
 
 
 if __name__ == '__main__':
-    user = 'root'#input('your db user name:')
-    dbPassword = 'vtzf2123+' #input('your db password:')
-    emailPassword =  'mlhdhdvdqzwpzbpx'# input('your email password:')
+    user = input('your db user name:')
+    dbPassword = input('your db password:')
+    emailPassword =  input('your email password:')
     with serverChat(user=user, dbPassword=dbPassword,
                     emailPassword=emailPassword) as server:
         server.serverRun()
