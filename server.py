@@ -11,9 +11,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+from email.encoders import encode_base64
 import pymysql
 import hashlib
 import subprocess
+
+
 
 
 '''
@@ -47,6 +50,7 @@ class serverChat():
         while True:
             try:
                 sock, addr = self.socket.accept()
+                print('已连接')
                 self.threads.submit(self.recMsg, sock)
             except Exception as e:
                 logging.exception(e)
@@ -197,11 +201,14 @@ class serverChat():
             except Exception as e:
                 logging.exception(e)
 
+        print('chuli')
         while True:
             # 获取处理消息类型
             msgType = str(socket.recv(1024), encoding='utf-8')
             if msgType == '注册':
                 signup()
+            elif msgType == 'quit':
+                return
             else:
                 name = login()
                 if not name:
@@ -232,6 +239,7 @@ class serverChat():
             if name == clientName:
                 self.clientList[name].send(bytes('发送错误',
                                                  encoding='utf-8'))
+                return
             self.clientList[name].send(bytes(clientName + ': ' + message,
                                              encoding='utf-8'))
             self.clientList[clientName].send(bytes('me: ' + message,
@@ -246,12 +254,13 @@ class serverChat():
             # 创建邮件主容器
             email = MIMEMultipart('alternative')
             # 添加密码附件
-            with open(name+'.txt', 'r', encoding='utf-8') as fp:
-                password = MIMEApplication(fp.read())
-                password.add_header('Content-Disposition',
+            fileName = name+'.txt'
+            with open(fileName, 'r', encoding='utf-8') as fp:
+                passwordFile = MIMEApplication(fp.read())
+                passwordFile.add_header('Content-Disposition',
                                     'attachment',
-                                    filename=(name+'.txt').encode('utf-8'))
-                email.attach(password)
+                                    filename=('gbk','',fileName))
+                email.attach(passwordFile)
             # 从服务器端删除多余的计算出来的hash链
             subprocess.run(['rm', name+'.txt'])
             # 创建html主题
@@ -304,9 +313,9 @@ class serverChat():
 
 
 if __name__ == '__main__':
-    user = input('your db user name:')
-    dbPassword = input('your db password:')
-    emailPassword = input('your email password:')
+    user = 'root'#input('your db user name:')
+    dbPassword = 'vtzf2123+' #input('your db password:')
+    emailPassword =  'mlhdhdvdqzwpzbpx'# input('your email password:')
     with serverChat(user=user, dbPassword=dbPassword,
                     emailPassword=emailPassword) as server:
         server.serverRun()

@@ -193,7 +193,6 @@ class chatWindow(QtWidgets.QDialog):
 
     # 退出的时候向服务器发送退出信息
     def closeEvent(self, event):
-        self.client.sendMessage('quit')
         print('子程序关闭啦')
         self.ifRecv = False
         self.close.closeApp.emit()

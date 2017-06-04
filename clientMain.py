@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMessageBox, QDesktopWidget
 from PyQt5.QtWidgets import QWidget
 import logging
 import os
+import time
 
 from clientFunc import clientChat
 from clientSignup import Ui_Dialog
@@ -118,6 +119,7 @@ class clientMain(QtWidgets.QWidget):
             从hash链中倒置使用，发送密码
             '''
             try:
+                print(os.getcwd()+'/'+name+'.txt')
                 with open(os.getcwd()+'/'+name+'.txt', 'r') as fp:
                     passwordLoc = fp.readline().strip()
 
@@ -139,6 +141,7 @@ class clientMain(QtWidgets.QWidget):
                     passwordList += fp.read().split('\n')
                     for pos, line in enumerate(passwordList):
                         if line.find('usethis') != -1:
+                            print(line)
                             password = line.strip()
                             if pos - 1 == 0:
                                 error = QMessageBox()
@@ -153,7 +156,8 @@ class clientMain(QtWidgets.QWidget):
 
             except Exception as e:
                 logging.exception(e)
-
+            self.client.sendMessage('登录')
+            time.sleep(1)
             self.client.sendMessage(name + ' ' + password)
             responseByte = self.client.recvMsg()
             if responseByte == b'\xe5\xa4\xb1\xe8\xb4\xa5\xef\xbc\x91':
@@ -201,6 +205,7 @@ class clientMain(QtWidgets.QWidget):
             logging.exception(e)
 
     def closeEvent(self, event):
+        self.client.sendMessage('quit')
         print('关闭啦')
 
 if __name__ == "__main__":
